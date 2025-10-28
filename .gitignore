@@ -1,0 +1,6 @@
+.vs
+obj
+bin
+
+!bin/Debug/net8.0/raylib.dll
+!bin/Debug/net8.0/raylib.dll
