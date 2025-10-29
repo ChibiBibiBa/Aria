@@ -1,27 +1,96 @@
-using Aria.templates;
+using Aria.GameObjects;
 using Raylib_cs;
 
 namespace Aria.Systems.Collision
 {
-
-    public class CollisionManager
+    public static class CollisionManager
     {
-        private static CollisionManager? _instance;
-        public static CollisionManager Instance
+
+
+        public static bool CheckCollision(IGameObject Collider, IGameObject Collidee)
         {
-            get
+            return Raylib.CheckCollisionRecs(Collider.Hitbox.ToRectangle(), Collidee.Hitbox.ToRectangle());
+        }
+        private static List<IHitbox> hitboxes = new List<IHitbox>();
+
+        public static void RegisterHitbox(IHitbox hitbox)
+        {
+            hitboxes.Add(hitbox);
+        }
+
+        public static void CollideAll()
+        {
+            ResetCollision();
+            int lenght = hitboxes.Count;
+
+            for (int i = 0; i < lenght; i++)
             {
-                if (_instance == null)
+                for (int j = 0; j < lenght; j++)
                 {
-                    _instance = new();
+                    if (j == i)
+                    {
+                        continue;
+                    }
+                    CollideTwo(hitboxes[i], hitboxes[j]);
+
                 }
-                return _instance;
+            }
+        }
+        public static void CollideTwo(IHitbox first, IHitbox second)
+        {
+            Rectangle a = first.ToRectangle();
+            Rectangle b = second.ToRectangle();
+
+            if (!Raylib.CheckCollisionRecs(a, b))
+                return;
+
+            float aCenterX = a.X + a.Width * 0.5f;
+            float aCenterY = a.Y + a.Height * 0.5f;
+            float bCenterX = b.X + b.Width * 0.5f;
+            float bCenterY = b.Y + b.Height * 0.5f;
+
+            float dx = aCenterX - bCenterX;
+            float dy = aCenterY - bCenterY;
+
+            float overlapX = (a.Width + b.Width) * 0.5f - MathF.Abs(dx);
+            float overlapY = (a.Height + b.Height) * 0.5f - MathF.Abs(dy);
+
+            if (overlapX < overlapY)
+            {
+                if (dx > 0)
+                {
+                    first.CollisionLeft = true;
+                    second.CollisionRight = true;
+                }
+                else
+                {
+                    first.CollisionRight = true;
+                    second.CollisionLeft = true;
+                }
+            }
+            else
+            {
+                if (dy > 0)
+                {
+                    first.CollisionDown = true;
+                    second.CollisionTop = true;
+                }
+                else
+                {
+                    first.CollisionTop = true;
+                    second.CollisionDown = true;
+                }
             }
         }
 
-        public bool CheckCollision(IGameObject Collider, IGameObject Collidee)
+
+        public static void ResetCollision()
         {
-            return Raylib.CheckCollisionRecs(Collider.Collider, Collidee.Collider);
+            foreach (var hitbox in hitboxes)
+            {
+                hitbox.IsColliding = false;
+            }
         }
+
     }
 }

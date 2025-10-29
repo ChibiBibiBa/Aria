@@ -1,23 +1,20 @@
 using Aria.templates;
+using Aria.GameObjects;
 using Raylib_cs;
 
 namespace Aria.testing
 {
-    public class Capsule
-    {
-    }
-
     public class Player : GameObject
     {
-        public Player(Vector2D position, GameObjectTags[] tags, Vector2D size) : base(position, tags, size)
+        public Player(Vector2D position, GameObjectTags[] tags, Vector2D size) : base(position,size)
         {
         }
     }
 
-    public class Tree : GameObject
+    public class StaticObject : GameObject
     {
 
-        public Tree(Vector2D position, GameObjectTags[] tags, Vector2D size) : base(position, tags, size)
+        public StaticObject(Vector2D position, GameObjectTags[] tags, Vector2D size) : base(position, size)
         {
         }
     }

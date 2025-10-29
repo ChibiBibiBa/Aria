@@ -1,34 +1,38 @@
+using System.Numerics;
+using Aria.GameObjects;
 using Aria.testing;
 using Raylib_cs;
+using Aria.templates;
 
 namespace Aria.Systems.Movement
 {
-    public class MovementManager
+    public static class MovementManager
     {
-        private float speed = 700f;
 
-        private static MovementManager? _instance;
-        public static MovementManager Instance
+        public static void MoveAndSlide(IGameObject o, Vector2D velocity) { }
+        public static void MoveAndCollide(IGameObject o, Vector2D velocity)
         {
-            get
+            var hitbox = o.Hitbox;
+            if (hitbox.CollisionLeft && velocity.X < 0)
             {
-                if (_instance == null)
-                {
-                    _instance = new();
-                }
-                return _instance;
+                velocity.X = 0;
             }
+            else if (hitbox.CollisionRight && velocity.X > 0)
+            {
+                velocity.X = 0;
+            }
+            if (hitbox.CollisionDown && velocity.Y < 0)
+            {
+                velocity.Y = 0;
+            }
+            else if (hitbox.CollisionTop && velocity.Y > 0)
+            {
+                velocity.Y = 0;
+            }
+            o.MoveTo(velocity);
         }
-
-        public void setSpeed(float speed)
-        {
-            this.speed = speed;
-        }
-
-        public void MovePlayer(Player player)
-        {
-            
-        }
+        public static void Move(IGameObject o, Vector2D velocity) { }
+        public static void MoveAndBounce(IGameObject o, Vector2D velocity) { }
 
     }
 }
