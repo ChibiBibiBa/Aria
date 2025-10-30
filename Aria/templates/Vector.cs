@@ -41,6 +41,11 @@ namespace Aria.templates
         {
             return new Vector2D(v1.X + v2.X, v1.Y + v2.Y);
         }
+
+        public Vector2 ToClassicVector()
+        {
+            return new Vector2(X,Y);
+        }
     }
 
     public static class VectorHelper

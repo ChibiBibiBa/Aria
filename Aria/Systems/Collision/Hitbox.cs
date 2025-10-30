@@ -72,18 +72,7 @@ namespace Aria.Systems.Collision
             this.Y = Y;
         }
 
-        public void SetCollision(CollidingOn c)
-        {
-            throw new NotImplementedException();
-        }
     }
 
-    public enum CollidingOn
-    {
-        NotColliding = 0,
-        Top,
-        Left,
-        Down,
-        Right,
-    }
+ 
 }
