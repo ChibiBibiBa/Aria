@@ -12,7 +12,7 @@ namespace Aria.Systems.Collision
         CollisionEntry CollisionDown { get; set; }
         bool IsColliding { get; set; }
         Rectangle ToRectangle();
-        void UpdatePosition(float X, float Y);
+        void SetPosition(float X, float Y);
     }
 
     public class Hitbox : IHitbox
@@ -66,7 +66,7 @@ namespace Aria.Systems.Collision
         {
             return new Rectangle(x, y, width, height);
         }
-        public void UpdatePosition(float X, float Y)
+        public void SetPosition(float X, float Y)
         {
             this.X = X;
             this.Y = Y;

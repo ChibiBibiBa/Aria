@@ -23,7 +23,7 @@ namespace Aria.GameObjects
             set
             {
                 _position = value;
-                Hitbox.UpdatePosition(_position.X, _position.Y);
+                Hitbox.SetPosition(_position.X, _position.Y);
             }
         }
         public IHitbox Hitbox { get; set; }
