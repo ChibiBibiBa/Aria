@@ -59,26 +59,26 @@ namespace Aria.Systems.Collision
             {
                 if (dx > 0)
                 {
-                    first.CollisionLeft = true;
-                    second.CollisionRight = true;
+                    first.CollisionLeft.Colliding = true;
+                    second.CollisionRight.Colliding = true;
                 }
                 else
                 {
-                    first.CollisionRight = true;
-                    second.CollisionLeft = true;
+                    first.CollisionRight.Colliding = true;
+                    second.CollisionLeft.Colliding = true;
                 }
             }
             else
             {
                 if (dy > 0)
                 {
-                    first.CollisionDown = true;
-                    second.CollisionTop = true;
+                    first.CollisionDown.Colliding = true;
+                    second.CollisionTop.Colliding = true;
                 }
                 else
                 {
-                    first.CollisionTop = true;
-                    second.CollisionDown = true;
+                    first.CollisionTop.Colliding = true;
+                    second.CollisionDown.Colliding = true;
                 }
             }
         }

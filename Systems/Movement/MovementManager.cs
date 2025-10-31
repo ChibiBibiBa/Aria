@@ -27,19 +27,20 @@ namespace Aria.Systems.Movement
         {
             var hitbox = o.Hitbox;
             Vector2D velocity = new Vector2D(o.Velocity);
-            if (hitbox.CollisionLeft && velocity.X < 0)
+            if (hitbox.CollisionLeft.Colliding && velocity.X < 0)
             {
                 velocity.X = 0;
             }
-            else if (hitbox.CollisionRight && velocity.X > 0)
+            else if (hitbox.CollisionRight.Colliding && velocity.X > 0)
             {
                 velocity.X = 0;
             }
-            if (hitbox.CollisionDown && velocity.Y < 0)
+            
+            if (hitbox.CollisionDown.Colliding && velocity.Y < 0)
             {
                 velocity.Y = 0;
             }
-            else if (hitbox.CollisionTop && velocity.Y > 0)
+            else if (hitbox.CollisionTop.Colliding && velocity.Y > 0)
             {
                 velocity.Y = 0;
             }

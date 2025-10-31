@@ -6,10 +6,10 @@ namespace Aria.Systems.Collision
     public interface IHitbox
     {
         Vector2D Center { get; }
-        bool CollisionTop { get; set; }
-        bool CollisionRight { get; set; }
-        bool CollisionLeft { get; set; }
-        bool CollisionDown { get; set; }
+        CollisionEntry CollisionTop { get; set; }
+        CollisionEntry CollisionRight { get; set; }
+        CollisionEntry CollisionLeft { get; set; }
+        CollisionEntry CollisionDown { get; set; }
         bool IsColliding { get; set; }
         Rectangle ToRectangle();
         void UpdatePosition(float X, float Y);
@@ -25,22 +25,22 @@ namespace Aria.Systems.Collision
         public float Y { get => y; private set => y = value; }
         public float Height { get => height; private set => height = value; }
         public float Width { get => width; private set => width = value; }
-        public bool CollisionTop { get; set; }
-        public bool CollisionRight { get; set; }
-        public bool CollisionLeft { get; set; }
-        public bool CollisionDown { get; set; }
+        public CollisionEntry CollisionTop { get; set; } = new CollisionEntry();
+        public CollisionEntry CollisionRight { get; set; } = new CollisionEntry();
+        public CollisionEntry CollisionLeft { get; set; } = new CollisionEntry();
+        public CollisionEntry CollisionDown { get; set; } = new CollisionEntry();
         public bool IsColliding
         {
             get
             {
-                return CollisionTop || CollisionRight || CollisionLeft || CollisionDown;
+                return CollisionTop.Colliding || CollisionRight.Colliding || CollisionLeft.Colliding || CollisionDown.Colliding;
             }
             set
             {
-                CollisionTop = value;
-                CollisionRight = value;
-                CollisionLeft = value;
-                CollisionDown = value;
+                CollisionTop.Colliding = value;
+                CollisionRight.Colliding = value;
+                CollisionLeft.Colliding = value;
+                CollisionDown.Colliding = value;
             }
         }
 
@@ -74,5 +74,5 @@ namespace Aria.Systems.Collision
 
     }
 
- 
+
 }

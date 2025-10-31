@@ -1,4 +1,4 @@
-namespace Aria.Context.Settings
+namespace Aria.Context
 {
     public class Settings
     {
