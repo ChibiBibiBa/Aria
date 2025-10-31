@@ -36,15 +36,28 @@ namespace Aria.templates
             this.X = X;
             this.Y = Y;
         }
+        public Vector2 ToClassicVector()
+        {
+            return new Vector2(X, Y);
+        }
 
         public static Vector2D operator +(Vector2D v1, Vector2D v2)
         {
             return new Vector2D(v1.X + v2.X, v1.Y + v2.Y);
         }
 
-        public Vector2 ToClassicVector()
+
+        public static bool operator ==(Vector2D v1, Vector2D v2)
         {
-            return new Vector2(X,Y);
+            if(v1.X != v2.X) return false;
+            if(v1.Y != v2.Y) return false;
+            return true;
+        }
+        public static bool operator !=(Vector2D v1, Vector2D v2)
+        {
+            if (v1.X == v2.X) return false;
+            if (v1.Y == v2.Y) return false;
+            return true;
         }
     }
 

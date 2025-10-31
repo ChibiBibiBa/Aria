@@ -1,5 +1,4 @@
 using Aria.templates;
-using Aria.testing;
 using Raylib_cs;
 using Aria.Systems.Clocks;
 using Aria.Systems.Movement;
@@ -7,13 +6,13 @@ using Aria.Systems.Movement;
 
 namespace Aria.Entities.Player
 {
-    public class PlayerMovement
+    public class PlayerController
     {
         private Player player;
         private Clock dashCooldown = new Clock(0.5f);
         private Clock dashDuration = new Clock(0.2f);
         private Vector2D Directions = new Vector2D(0, 0);
-        public PlayerMovement(Player player)
+        public PlayerController(Player player)
         {
             this.player = player;
         }
@@ -36,11 +35,12 @@ namespace Aria.Entities.Player
                 speedModifier = player.DashSpeedModifier;
             }
 
-            var TotalSpeed = player.MovementSpeed * speedModifier * Raylib.GetFrameTime();
+            var TotalSpeed = player.Speed * speedModifier * Raylib.GetFrameTime();
             Directions = VectorHelper.Normalize(Directions);
             Vector2D velocity = new Vector2D(Directions.X * TotalSpeed, Directions.Y * TotalSpeed);
 
             MovementManager.MoveAndCollide(player, velocity);
+
 
             Directions.X = 0;
             Directions.Y = 0;
