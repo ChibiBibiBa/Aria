@@ -5,11 +5,10 @@ namespace Aria.Systems.Clocks
     public class Clock
     {
         private float currentValue = 0f;
-        private float duration;
-        private bool finished = false;
-        private bool ongoing = false;
-        public bool Finished { get { return finished; } }
-        public bool Ongoing { get { return ongoing; } }
+        private float duration = 0f;
+        public bool Finished { get; private set; } = false;
+        public bool Ongoing { get; private set; } = false;
+        public bool Stopped { get; private set; } = false;
         public Clock(float duration)
         {
             this.duration = duration;
@@ -18,21 +17,26 @@ namespace Aria.Systems.Clocks
         public void Reset()
         {
             currentValue = 0f;
-            finished = false;
-            ongoing = false;
+            Finished = false;
+            Ongoing = false;
+            Stopped = false;
         }
 
         public void Update()
         {
-            if (ongoing && !finished)
+            if (Stopped)
+            {
+                return;
+            }
+            if (Ongoing && !Finished)
             {
                 currentValue += Raylib.GetFrameTime();
             }
 
             if (currentValue >= duration)
             {
-                ongoing = false;
-                finished = true;
+                Ongoing = false;
+                Finished = true;
             }
         }
 
@@ -40,10 +44,17 @@ namespace Aria.Systems.Clocks
         public Updater Start()
         {
             Reset();
-            this.ongoing = true;
+            this.Ongoing = true;
             return this.Update;
         }
-
+        public void Stop()
+        {
+            Stopped = true;
+        }
+        public void Resume()
+        {
+            Stopped = false;
+        }
 
     }
 }

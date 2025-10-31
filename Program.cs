@@ -5,8 +5,8 @@ using Aria.Systems.Collision;
 using System.Numerics;
 using Aria.Entities.Player;
 using Aria.GameObjects;
-using Aria.Enviroment.Window;
 using Aria.Systems.Movement;
+using Aria.Enviroment;
 
 namespace ConsoleApp
 {
@@ -14,29 +14,29 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Window window = new Window();
-
             Raylib.SetConfigFlags(ConfigFlags.UndecoratedWindow);
 
-            Raylib.InitWindow(window.Width, window.Height, "Aria");
+            Raylib.InitWindow(Enviroment.Window.Width, Enviroment.Window.Height, "Aria");
             // Raylib.InitWindow(200, 200, "Aria");
-            window.UpdateSize();
+            Enviroment.Window.UpdateSize();
 
-            Player player = new Player(new Vector2D((window.Width / 2) + 25, (window.Height / 2) + 25), new Vector2D(50, 50));
+            Player player = new Player(new Vector2D((Enviroment.Window.Width / 2) + 25, (Enviroment.Window.Height / 2) + 25), new Vector2D(50, 50));
+
+            Enviroment.SetPlayer(player);
 
             StaticObject tree = new StaticObject(new Vector2D(500, 200), new Vector2D(75, 75));
             StaticObject house = new StaticObject(new Vector2D(700, 700), new Vector2D(400, 120));
 
 
             Camera2D camera = new Camera2D();
-            camera.Offset = new Vector2(window.Width / 2, window.Height / 2);
+            camera.Offset = new Vector2(Enviroment.Window.Width / 2, Enviroment.Window.Height / 2);
             camera.Rotation = 0f;
             camera.Zoom = 1f;
 
-            StaticObject BorderNorth = new StaticObject(new Vector2D(0, -1), new Vector2D(window.Width, 1));
-            StaticObject BorderSouth = new StaticObject(new Vector2D(0, window.Height), new Vector2D(window.Width, 1));
-            StaticObject BorderEast = new StaticObject(new Vector2D(window.Width, 0), new Vector2D(1, window.Height));
-            StaticObject BorderWest = new StaticObject(new Vector2D(-1, 0), new Vector2D(1, window.Height));
+            StaticObject BorderNorth = new StaticObject(new Vector2D(0, -1), new Vector2D(Enviroment.Window.Width, 1));
+            StaticObject BorderSouth = new StaticObject(new Vector2D(0, Enviroment.Window.Height), new Vector2D(Enviroment.Window.Width, 1));
+            StaticObject BorderEast = new StaticObject(new Vector2D(Enviroment.Window.Width, 0), new Vector2D(1, Enviroment.Window.Height));
+            StaticObject BorderWest = new StaticObject(new Vector2D(-1, 0), new Vector2D(1, Enviroment.Window.Height));
 
 
             while (!Raylib.WindowShouldClose())
@@ -65,7 +65,7 @@ namespace ConsoleApp
                 CollisionManager.CollideAll();
 
                 MovementManager.MoveAll();
-                
+
                 camera.Target = player.Position.ToClassicVector();
 
             }

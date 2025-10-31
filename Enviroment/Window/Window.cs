@@ -15,7 +15,6 @@ namespace Aria.Enviroment.Window
         {
             UpdateSize();
         }
-
         public void UpdateSize()
         {
             Width = Raylib.GetMonitorWidth(0);

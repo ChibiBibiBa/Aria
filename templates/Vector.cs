@@ -67,6 +67,10 @@ namespace Aria.templates
         {
             return base.GetHashCode();
         }
+        public override string ToString()
+        {
+            return $"{X} {Y}";
+        }
     }
 
     public static class VectorHelper

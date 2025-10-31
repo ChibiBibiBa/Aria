@@ -6,10 +6,10 @@ namespace Aria.Entities.Player
 {
     public class Player : KinematicObject
     {
-        public new float Speed { get; private set; } = 400f;
+        public new float Speed { get; private set; } = 300f;
         public new float Acceleration { get; private set; } = 100f;
         public new float MaxSpeed { get; private set; } = 500f;
-        public float DashSpeedModifier { get; private set; } = 5f;
+        public float DashSpeedModifier { get; private set; } = 3f;
 
         public PlayerController Controller { get; private set; }
         public Player(Vector2D position, Vector2D size) : base(position, size)

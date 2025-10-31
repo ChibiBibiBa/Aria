@@ -2,18 +2,21 @@ namespace Aria.Enviroment.Settings
 {
     public class Settings
     {
-        private static Settings? _instance;
+        private static Settings instance = new Settings();
+
         public static Settings Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new Settings();
+                    instance = new Settings();
                 }
-                return _instance;
+                return instance;
             }
-        }
-    }
 
+        }
+
+        private Settings() { }
+    }
 }
