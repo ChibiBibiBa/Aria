@@ -1,4 +1,4 @@
-namespace Aria.Enviroment.Logs
+namespace Aria.Context.Logs
 {
     public class Logs
     {

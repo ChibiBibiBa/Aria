@@ -1,10 +1,11 @@
 using Aria.GameObjects;
 using Aria.templates;
+using Aria.GameObjects.Entities;
 
 
-namespace Aria.Entities.Player
+namespace Aria.GameObjects.Entities.Player
 {
-    public class Player : KinematicObject
+    public class Player : Entity
     {
         public new float Speed { get; private set; } = 300f;
         public new float Acceleration { get; private set; } = 100f;

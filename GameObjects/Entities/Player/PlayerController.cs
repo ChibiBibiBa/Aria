@@ -4,7 +4,7 @@ using Aria.Systems.Clocks;
 using Aria.Systems.Movement;
 
 
-namespace Aria.Entities.Player
+namespace Aria.GameObjects.Entities.Player
 {
     public class PlayerController
     {
