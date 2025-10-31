@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace Aria.templates
@@ -46,7 +47,6 @@ namespace Aria.templates
             return new Vector2D(v1.X + v2.X, v1.Y + v2.Y);
         }
 
-
         public static bool operator ==(Vector2D v1, Vector2D v2)
         {
             if(v1.X != v2.X) return false;
@@ -58,6 +58,14 @@ namespace Aria.templates
             if (v1.X == v2.X) return false;
             if (v1.Y == v2.Y) return false;
             return true;
+        }
+        public override bool Equals([NotNullWhen(true)] object? obj)
+        {
+            return base.Equals(obj);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 

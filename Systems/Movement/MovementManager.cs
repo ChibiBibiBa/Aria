@@ -7,11 +7,26 @@ namespace Aria.Systems.Movement
 {
     public static class MovementManager
     {
+        private static List<KinematicObject> kinematicObjects = new List<KinematicObject>();
+
+        public static void Register(KinematicObject k)
+        {
+            kinematicObjects.Add(k);
+        }
+
+        public static void MoveAll()
+        {
+            foreach(var k in kinematicObjects)
+            {
+                MoveAndCollide(k);
+            }
+        }
 
         public static void MoveAndSlide(IGameObject o, Vector2D velocity) { }
-        public static void MoveAndCollide(IGameObject o, Vector2D velocity)
+        public static void MoveAndCollide(KinematicObject o)
         {
             var hitbox = o.Hitbox;
+            Vector2D velocity = new Vector2D(o.Velocity);
             if (hitbox.CollisionLeft && velocity.X < 0)
             {
                 velocity.X = 0;
@@ -28,7 +43,8 @@ namespace Aria.Systems.Movement
             {
                 velocity.Y = 0;
             }
-            o.MoveTo(velocity);
+            o.ApplyVelocity(velocity);
+            o.Move();
         }
         public static void Move(IGameObject o, Vector2D velocity) { }
         public static void MoveAndBounce(IGameObject o, Vector2D velocity) { }

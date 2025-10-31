@@ -37,10 +37,7 @@ namespace Aria.Entities.Player
 
             var TotalSpeed = player.Speed * speedModifier * Raylib.GetFrameTime();
             Directions = VectorHelper.Normalize(Directions);
-            Vector2D velocity = new Vector2D(Directions.X * TotalSpeed, Directions.Y * TotalSpeed);
-
-            MovementManager.MoveAndCollide(player, velocity);
-
+            player.ApplyVelocity(new Vector2D(Directions.X * TotalSpeed, Directions.Y * TotalSpeed));
 
             Directions.X = 0;
             Directions.Y = 0;

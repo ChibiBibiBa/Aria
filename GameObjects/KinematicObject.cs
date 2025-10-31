@@ -1,6 +1,7 @@
 ﻿using Aria.templates;
 
 using Aria.GameObjects;
+using Aria.Systems.Movement;
 
 namespace Aria.GameObjects
 {
@@ -11,13 +12,22 @@ namespace Aria.GameObjects
         public float MaxSpeed { get; private set; } = 0f;
         public float Weight { get; private set; } = 1f;
         public float Gravity { get; private set; } = 1f;
+        public Vector2D Velocity { get; private set; }
 
-        
-        public KinematicObject(Vector2D position, Vector2D size) : base(position,size) { }
 
-        public override void MoveTo(Vector2D newPosition)
+        public KinematicObject(Vector2D position, Vector2D size) : base(position, size)
         {
-            this.Position += newPosition;
+            MovementManager.Register(this);
+        }
+
+        public void ApplyVelocity(Vector2D velocity)
+        {
+            this.Velocity = velocity;
+        }
+
+        public override void Move()
+        {
+            this.Position += Velocity;
         }
     }
 }

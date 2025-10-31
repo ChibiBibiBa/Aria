@@ -10,7 +10,7 @@ namespace Aria.GameObjects
         Vector2D Position { get; set; }
         IHitbox Hitbox { get; set; }
 
-        void MoveTo(Vector2D newPosition);
+        void Move();
     }
 
     public abstract class GameObject : IGameObject
@@ -34,7 +34,7 @@ namespace Aria.GameObjects
             this.Hitbox = new Hitbox(position.X, position.Y, size.X, size.Y);
         }
 
-        public abstract void MoveTo(Vector2D newPosition);
+        public abstract void Move();
 
     }
 

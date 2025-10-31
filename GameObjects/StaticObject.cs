@@ -7,7 +7,7 @@ namespace Aria.GameObjects
     {
         public StaticObject(Vector2D position, Vector2D size):base(position, size) { }
 
-        public override void MoveTo(Vector2D newPosition)
+        public override void Move()
         {
             return;
         }
