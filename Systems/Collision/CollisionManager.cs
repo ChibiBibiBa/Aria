@@ -1,27 +1,22 @@
 using Aria.GameObjects;
+using Aria.GameObjects.Enviroment;
 using Raylib_cs;
 
 namespace Aria.Systems.Collision
 {
     public static class CollisionManager
     {
+        private static List<GameObject> objects = new List<GameObject>();
 
-
-        public static bool CheckCollision(IGameObject Collider, IGameObject Collidee)
+        public static void RegisterHitbox(GameObject hitbox)
         {
-            return Raylib.CheckCollisionRecs(Collider.Hitbox.ToRectangle(), Collidee.Hitbox.ToRectangle());
-        }
-        private static List<IHitbox> hitboxes = new List<IHitbox>();
-
-        public static void RegisterHitbox(IHitbox hitbox)
-        {
-            hitboxes.Add(hitbox);
+            objects.Add(hitbox);
         }
 
         public static void CollideAll()
         {
             ResetCollision();
-            int lenght = hitboxes.Count;
+            int lenght = objects.Count;
 
             for (int i = 0; i < lenght; i++)
             {
@@ -31,8 +26,10 @@ namespace Aria.Systems.Collision
                     {
                         continue;
                     }
-                    CollideTwo(hitboxes[i], hitboxes[j]);
+                    var first = objects[i];
+                    var second = objects[j];
 
+                    CollideTwo(first.Hitbox, second.Hitbox);
                 }
             }
         }
@@ -60,12 +57,10 @@ namespace Aria.Systems.Collision
                 if (dx > 0)
                 {
                     first.CollisionLeft.Colliding = true;
-                    second.CollisionRight.Colliding = true;
                 }
                 else
                 {
                     first.CollisionRight.Colliding = true;
-                    second.CollisionLeft.Colliding = true;
                 }
             }
             else
@@ -73,22 +68,30 @@ namespace Aria.Systems.Collision
                 if (dy > 0)
                 {
                     first.CollisionDown.Colliding = true;
-                    second.CollisionTop.Colliding = true;
                 }
                 else
                 {
                     first.CollisionTop.Colliding = true;
-                    second.CollisionDown.Colliding = true;
                 }
             }
         }
 
-
         public static void ResetCollision()
         {
-            foreach (var hitbox in hitboxes)
+            foreach (var hitbox in objects)
             {
-                hitbox.IsColliding = false;
+                hitbox.Hitbox.IsColliding = false;
+            }
+        }
+
+        public static void CheckCollisionType(IHitbox first, IHitbox second)
+        {
+            if (first.CollisionDown.Colliding)
+            {
+                if(second is Prop)
+                {
+                    first.CollisionDown.Target = CollidingWith.Enviroment;
+                }
             }
         }
 

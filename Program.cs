@@ -7,6 +7,7 @@ using Aria.GameObjects.Entities.Player;
 using Aria.GameObjects;
 using Aria.Systems.Movement;
 using Aria.Context;
+using Aria.Systems.Gravity;
 
 namespace ConsoleApp
 {
@@ -61,6 +62,8 @@ namespace ConsoleApp
                 Raylib.EndDrawing();
 
                 player.Controller.MovePlayer();
+
+                GravityManager.ApplyGravity();
 
                 CollisionManager.CollideAll();
 

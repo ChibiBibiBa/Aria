@@ -16,7 +16,7 @@ namespace Aria.Systems.Movement
 
         public static void MoveAll()
         {
-            foreach(var k in kinematicObjects)
+            foreach (var k in kinematicObjects)
             {
                 MoveAndCollide(k);
             }
@@ -35,7 +35,7 @@ namespace Aria.Systems.Movement
             {
                 velocity.X = 0;
             }
-            
+
             if (hitbox.CollisionDown.Colliding && velocity.Y < 0)
             {
                 velocity.Y = 0;
@@ -44,7 +44,7 @@ namespace Aria.Systems.Movement
             {
                 velocity.Y = 0;
             }
-            o.ApplyVelocity(velocity);
+            o.SetVelocity(velocity);
             o.Move();
         }
         public static void Move(IGameObject o, Vector2D velocity) { }

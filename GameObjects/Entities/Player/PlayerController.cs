@@ -32,9 +32,6 @@ namespace Aria.GameObjects.Entities.Player
                 dashDuration.Start();
             }
 
-            
-
-
             float TotalSpeed = player.Speed;
 
             if (!dashDuration.Ongoing)

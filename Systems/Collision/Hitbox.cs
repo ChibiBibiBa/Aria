@@ -50,7 +50,6 @@ namespace Aria.Systems.Collision
             this.y = y;
             this.height = height;
             this.width = width;
-            CollisionManager.RegisterHitbox(this);
         }
 
         public Vector2D Center

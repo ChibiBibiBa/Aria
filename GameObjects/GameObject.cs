@@ -32,6 +32,7 @@ namespace Aria.GameObjects
         {
             this._position = position;
             this.Hitbox = new Hitbox(position.X, position.Y, size.X, size.Y);
+            CollisionManager.RegisterHitbox(this);
         }
 
         public abstract void Move();
