@@ -30,6 +30,10 @@ namespace Aria.Systems.Collision
                     var second = objects[j];
 
                     CollideTwo(first.Hitbox, second.Hitbox);
+                    if (first.Hitbox.IsColliding)
+                    {
+                        CheckCollisionType(first, second);
+                    }
                 }
             }
         }
@@ -84,13 +88,13 @@ namespace Aria.Systems.Collision
             }
         }
 
-        public static void CheckCollisionType(IHitbox first, IHitbox second)
+        public static void CheckCollisionType(GameObject first, GameObject second)
         {
-            if (first.CollisionDown.Colliding)
+            if (first.Hitbox.CollisionTop.Colliding)
             {
-                if(second is Prop)
+                if (second is Prop)
                 {
-                    first.CollisionDown.Target = CollidingWith.Enviroment;
+                    first.Hitbox.CollisionDown.Target = CollidingWith.Enviroment;
                 }
             }
         }

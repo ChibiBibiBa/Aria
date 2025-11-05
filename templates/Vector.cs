@@ -59,6 +59,11 @@ namespace Aria.templates
             if (v1.Y == v2.Y) return false;
             return true;
         }
+
+        public static Vector2D operator *(Vector2D v, float x)
+        {
+            return new Vector2D(v.X * x, v.Y * x);
+        }
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             return base.Equals(obj);

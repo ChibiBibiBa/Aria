@@ -4,7 +4,7 @@ using Aria.Systems.Drawing;
 using Aria.Systems.Collision;
 using System.Numerics;
 using Aria.GameObjects.Entities.Player;
-using Aria.GameObjects;
+using Aria.GameObjects.Enviroment;
 using Aria.Systems.Movement;
 using Aria.Context;
 using Aria.Systems.Gravity;
@@ -16,17 +16,17 @@ namespace ConsoleApp
         static void Main()
         {
             Raylib.SetConfigFlags(ConfigFlags.UndecoratedWindow);
-
+            // Raylib.InitWindow(800, 800, "Aria");
             Raylib.InitWindow(ContextData.Window.Width, ContextData.Window.Height, "Aria");
-            // Raylib.InitWindow(200, 200, "Aria");
             ContextData.Window.UpdateSize();
 
             Player player = new Player(new Vector2D((ContextData.Window.Width / 2) + 25, (ContextData.Window.Height / 2) + 25), new Vector2D(50, 50));
 
             ContextData.SetPlayer(player);
 
-            StaticObject tree = new StaticObject(new Vector2D(500, 200), new Vector2D(75, 75));
-            StaticObject house = new StaticObject(new Vector2D(700, 700), new Vector2D(400, 120));
+            Prop house = new Prop(new Vector2D(700, 700), new Vector2D(400, 120));
+            house.SetDebugName("House");
+            Prop tree = new Prop(new Vector2D(500, 200), new Vector2D(75, 75));
 
 
             Camera2D camera = new Camera2D();
@@ -34,10 +34,10 @@ namespace ConsoleApp
             camera.Rotation = 0f;
             camera.Zoom = 1f;
 
-            StaticObject BorderNorth = new StaticObject(new Vector2D(0, -1), new Vector2D(ContextData.Window.Width, 1));
-            StaticObject BorderSouth = new StaticObject(new Vector2D(0, ContextData.Window.Height), new Vector2D(ContextData.Window.Width, 1));
-            StaticObject BorderEast = new StaticObject(new Vector2D(ContextData.Window.Width, 0), new Vector2D(1, ContextData.Window.Height));
-            StaticObject BorderWest = new StaticObject(new Vector2D(-1, 0), new Vector2D(1, ContextData.Window.Height));
+            Prop BorderNorth = new Prop(new Vector2D(0, -1), new Vector2D(ContextData.Window.Width, 1));
+            Prop BorderSouth = new Prop(new Vector2D(0, ContextData.Window.Height), new Vector2D(ContextData.Window.Width, 1));
+            Prop BorderEast = new Prop(new Vector2D(ContextData.Window.Width, 0), new Vector2D(1, ContextData.Window.Height));
+            Prop BorderWest = new Prop(new Vector2D(-1, 0), new Vector2D(1, ContextData.Window.Height));
 
 
             while (!Raylib.WindowShouldClose())
@@ -59,11 +59,12 @@ namespace ConsoleApp
                 DrawingHelper.DrawRectangle(BorderEast.Hitbox.ToRectangle(), Color.Red);
 
                 Raylib.EndMode2D();
+                Raylib.DrawText($"Player collisions: down: {player.Hitbox.CollisionDown.Colliding} left:{player.Hitbox.CollisionLeft.Colliding} right:{player.Hitbox.CollisionRight.Colliding} top:{player.Hitbox.CollisionTop.Colliding} colliding:{player.Hitbox.IsColliding} grounded:{player.OnGround}", 0, 0, 25, Color.Pink);
+
                 Raylib.EndDrawing();
 
-                player.Controller.MovePlayer();
+                player.Controller.PlayerMovementInput();
 
-                GravityManager.ApplyGravity();
 
                 CollisionManager.CollideAll();
 

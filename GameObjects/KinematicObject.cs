@@ -3,6 +3,7 @@
 using Aria.GameObjects;
 using Aria.Systems.Movement;
 using Aria.Systems.Gravity;
+using Aria.Systems.Collision;
 
 namespace Aria.GameObjects
 {
@@ -12,9 +13,10 @@ namespace Aria.GameObjects
         public float Acceleration { get; private set; } = 0f;
         public float MaxSpeed { get; private set; } = 0f;
         public float Weight { get; private set; } = 1f;
-        public float Gravity { get; private set; } = 1f;
+        public float Gravity { get; private set; } = 0.25f;
+        public float Friction { get; private set; } = 0.85f;
         public Vector2D Velocity { get; private set; }
-        public bool Airborne { get; set; } = false;
+        public bool OnGround => Hitbox.CollisionTop.Colliding;
 
         public KinematicObject(Vector2D position, Vector2D size) : base(position, size)
         {
@@ -35,7 +37,7 @@ namespace Aria.GameObjects
         public override void Move()
         {
             this.Position += Velocity;
-            Velocity = new Vector2D();
+            Velocity = new Vector2D(Velocity.X * Friction, Velocity.Y * Gravity); 
         }
     }
 }

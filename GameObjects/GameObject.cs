@@ -15,7 +15,7 @@ namespace Aria.GameObjects
 
     public abstract class GameObject : IGameObject
     {
-
+        public string DebugName = "GameObject";
         private Vector2D _position;
         public Vector2D Position
         {
@@ -36,7 +36,10 @@ namespace Aria.GameObjects
         }
 
         public abstract void Move();
-
+        public void SetDebugName(string dn)
+        {
+            DebugName = dn;
+        }
     }
 
 }

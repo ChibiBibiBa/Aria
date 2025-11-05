@@ -19,6 +19,8 @@ namespace Aria.Context
         {
             Width = Raylib.GetMonitorWidth(0);
             Height = Raylib.GetMonitorHeight(0);
+            // Width = 600;
+            // Height = 600;
         }
     }
 }

@@ -13,43 +13,33 @@ namespace Aria.GameObjects.Entities.Player
         private Clock dashDuration = new Clock(0.2f);
         private Vector2D Directions = new Vector2D(0, 0);
         private Accelerator accelerator;
+
+        private bool walking = false;
+        private bool jumping = false;
+        private bool dashing = false;
+
+
+
         public PlayerController(Player player)
         {
             this.player = player;
             accelerator = new Accelerator(player.MaxSpeed, player.Acceleration);
         }
 
-        public void MovePlayer()
+        public void PlayerMovementInput()
         {
             UpdateClocks();
             GetMovementInputs();
 
             float speedModifier = 1f;
 
-            if (Raylib.IsKeyDown(KeyboardKey.LeftShift) && !dashCooldown.Ongoing && !dashDuration.Ongoing)
-            {
-                dashCooldown.Start();
-                dashDuration.Start();
-            }
-
             float TotalSpeed = player.Speed;
-
-            if (!dashDuration.Ongoing)
-            {
-                TotalSpeed = accelerator.Accelerate(Directions, TotalSpeed);
-            }
-            else
-            {
-                speedModifier += player.DashSpeedModifier;
-                TotalSpeed = player.Speed * speedModifier;
-            }
-
-
+            
             TotalSpeed *= Raylib.GetFrameTime();
-            Directions = VectorHelper.Normalize(Directions);
+            // Directions = VectorHelper.Normalize(Directions);
 
 
-            player.ApplyVelocity(new Vector2D(Directions.X * TotalSpeed, Directions.Y * TotalSpeed));
+            player.ApplyVelocity(new Vector2D(Directions.X * TotalSpeed, Directions.Y * player.JumpForce * Raylib.GetFrameTime()));
 
 
             Directions.X = 0;
@@ -60,28 +50,23 @@ namespace Aria.GameObjects.Entities.Player
             if (Raylib.IsKeyDown(KeyboardKey.D))
             {
                 Directions.X += 1;
+                walking = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.A))
             {
                 Directions.X -= 1;
+                walking = true;
             }
-            if (Raylib.IsKeyDown(KeyboardKey.W))
+            if (Raylib.IsKeyDown(KeyboardKey.Space) && player.OnGround)
             {
                 Directions.Y -= 1;
-            }
-            if (Raylib.IsKeyDown(KeyboardKey.S))
-            {
-                Directions.Y += 1;
+                jumping = true;
             }
         }
         private void UpdateClocks()
         {
             dashCooldown.Update();
             dashDuration.Update();
-        }
-        private void ApplyMovement(Vector2D velocity)
-        {
-            player.Position = new Vector2D(velocity);
         }
 
     }

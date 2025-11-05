@@ -18,11 +18,7 @@ namespace Aria.Systems.Gravity
         {
             foreach (var obj in kinematicObjects)
             {
-                if(obj.Hitbox.CollisionDown.Colliding && obj.Hitbox.CollisionDown.Target == Collision.CollidingWith.Enviroment)
-                {
-                    obj.Airborne = true;
-                }
-                if (obj.Airborne)
+                if (obj.OnGround)
                 {
                     continue;
                 }
