@@ -33,7 +33,7 @@ namespace Aria.GameObjects
         public override void Move()
         {
             this.Position += Velocity;
-            Velocity = new Vector2D(Velocity.X * Friction, Velocity.Y * Gravity); 
+            Velocity = new Vector2D(0, 0); 
         }
     }
 }

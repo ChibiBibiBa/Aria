@@ -14,12 +14,6 @@ namespace Aria.GameObjects.Entities.Player
         private Vector2D Directions = new Vector2D(0, 0);
         private Accelerator accelerator;
 
-        private bool walking = false;
-        private bool jumping = false;
-        private bool dashing = false;
-
-
-
         public PlayerController(Player player)
         {
             this.player = player;
@@ -31,14 +25,13 @@ namespace Aria.GameObjects.Entities.Player
             UpdateClocks();
             GetMovementInputs();
 
-
             float TotalSpeed = player.Speed;
 
             TotalSpeed *= Raylib.GetFrameTime();
             Directions = VectorHelper.Normalize(Directions);
 
 
-            player.ApplyVelocity(new Vector2D(Directions.X * TotalSpeed, Directions.Y * player.JumpForce * Raylib.GetFrameTime()));
+            player.ApplyVelocity(new Vector2D(Directions.X * TotalSpeed, Directions.Y * TotalSpeed));
 
 
             Directions.X = 0;
@@ -49,12 +42,10 @@ namespace Aria.GameObjects.Entities.Player
             if (Raylib.IsKeyDown(KeyboardKey.D))
             {
                 Directions.X += 1;
-                walking = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.A))
             {
                 Directions.X -= 1;
-                walking = true;
             }
             if(Raylib.IsKeyDown(KeyboardKey.W))
             {

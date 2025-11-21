@@ -19,6 +19,7 @@ namespace ConsoleApp
             Raylib.InitWindow(ContextData.Window.Width, ContextData.Window.Height, "Aria");
             ContextData.Window.UpdateSize();
 
+
             Player player = new Player(new Vector2D((ContextData.Window.Width / 2) + 25, (ContextData.Window.Height / 2) + 25), new Vector2D(50, 50));
 
             ContextData.SetPlayer(player);
