@@ -71,11 +71,11 @@ namespace Aria.Systems.Collision
             {
                 if (dy > 0)
                 {
-                    first.CollisionDown.Colliding = true;
+                    first.CollisionTop.Colliding = true;
                 }
                 else
                 {
-                    first.CollisionTop.Colliding = true;
+                    first.CollisionDown.Colliding = true;
                 }
             }
         }
@@ -90,11 +90,11 @@ namespace Aria.Systems.Collision
 
         public static void CheckCollisionType(GameObject first, GameObject second)
         {
-            if (first.Hitbox.CollisionTop.Colliding)
+            if (first.Hitbox.CollisionDown.Colliding)
             {
                 if (second is Prop)
                 {
-                    first.Hitbox.CollisionDown.Target = CollidingWith.Enviroment;
+                    first.Hitbox.CollisionTop.Target = CollidingWith.Enviroment;
                 }
             }
         }

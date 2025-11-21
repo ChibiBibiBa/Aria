@@ -7,7 +7,6 @@ using Aria.GameObjects.Entities.Player;
 using Aria.GameObjects.Enviroment;
 using Aria.Systems.Movement;
 using Aria.Context;
-using Aria.Systems.Gravity;
 
 namespace ConsoleApp
 {
@@ -59,7 +58,7 @@ namespace ConsoleApp
                 DrawingHelper.DrawRectangle(BorderEast.Hitbox.ToRectangle(), Color.Red);
 
                 Raylib.EndMode2D();
-                Raylib.DrawText($"Player collisions: down: {player.Hitbox.CollisionDown.Colliding} left:{player.Hitbox.CollisionLeft.Colliding} right:{player.Hitbox.CollisionRight.Colliding} top:{player.Hitbox.CollisionTop.Colliding} colliding:{player.Hitbox.IsColliding} grounded:{player.OnGround}", 0, 0, 25, Color.Pink);
+                Raylib.DrawText($"Player collisions: top: {player.Hitbox.CollisionTop.Colliding} left:{player.Hitbox.CollisionLeft.Colliding} right:{player.Hitbox.CollisionRight.Colliding} bottom:{player.Hitbox.CollisionDown.Colliding} colliding:{player.Hitbox.IsColliding}", 0, 0, 25, Color.Pink);
 
                 Raylib.EndDrawing();
 

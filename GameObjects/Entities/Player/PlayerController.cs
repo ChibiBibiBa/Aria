@@ -31,12 +31,11 @@ namespace Aria.GameObjects.Entities.Player
             UpdateClocks();
             GetMovementInputs();
 
-            float speedModifier = 1f;
 
             float TotalSpeed = player.Speed;
-            
+
             TotalSpeed *= Raylib.GetFrameTime();
-            // Directions = VectorHelper.Normalize(Directions);
+            Directions = VectorHelper.Normalize(Directions);
 
 
             player.ApplyVelocity(new Vector2D(Directions.X * TotalSpeed, Directions.Y * player.JumpForce * Raylib.GetFrameTime()));
@@ -57,10 +56,13 @@ namespace Aria.GameObjects.Entities.Player
                 Directions.X -= 1;
                 walking = true;
             }
-            if (Raylib.IsKeyDown(KeyboardKey.Space) && player.OnGround)
+            if(Raylib.IsKeyDown(KeyboardKey.W))
             {
-                Directions.Y -= 1;
-                jumping = true;
+                Directions.Y -=1;
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.S))
+            {
+                Directions.Y += 1;
             }
         }
         private void UpdateClocks()

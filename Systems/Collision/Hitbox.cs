@@ -6,10 +6,10 @@ namespace Aria.Systems.Collision
     public interface IHitbox
     {
         Vector2D Center { get; }
-        CollisionEntry CollisionTop { get; set; }
+        CollisionEntry CollisionDown { get; set; }
         CollisionEntry CollisionRight { get; set; }
         CollisionEntry CollisionLeft { get; set; }
-        CollisionEntry CollisionDown { get; set; }
+        CollisionEntry CollisionTop { get; set; }
         bool IsColliding { get; set; }
         Rectangle ToRectangle();
         void SetPosition(float X, float Y);
@@ -25,22 +25,22 @@ namespace Aria.Systems.Collision
         public float Y { get => y; private set => y = value; }
         public float Height { get => height; private set => height = value; }
         public float Width { get => width; private set => width = value; }
-        public CollisionEntry CollisionTop { get; set; } = new CollisionEntry();
+        public CollisionEntry CollisionDown { get; set; } = new CollisionEntry();
         public CollisionEntry CollisionRight { get; set; } = new CollisionEntry();
         public CollisionEntry CollisionLeft { get; set; } = new CollisionEntry();
-        public CollisionEntry CollisionDown { get; set; } = new CollisionEntry();
+        public CollisionEntry CollisionTop { get; set; } = new CollisionEntry();
         public bool IsColliding
         {
             get
             {
-                return CollisionTop.Colliding || CollisionRight.Colliding || CollisionLeft.Colliding || CollisionDown.Colliding;
+                return CollisionDown.Colliding || CollisionRight.Colliding || CollisionLeft.Colliding || CollisionTop.Colliding;
             }
             set
             {
-                CollisionTop.Colliding = value;
+                CollisionDown.Colliding = value;
                 CollisionRight.Colliding = value;
                 CollisionLeft.Colliding = value;
-                CollisionDown.Colliding = value;
+                CollisionTop.Colliding = value;
             }
         }
 

@@ -2,7 +2,6 @@
 
 using Aria.GameObjects;
 using Aria.Systems.Movement;
-using Aria.Systems.Gravity;
 using Aria.Systems.Collision;
 
 namespace Aria.GameObjects
@@ -16,12 +15,9 @@ namespace Aria.GameObjects
         public float Gravity { get; private set; } = 0.25f;
         public float Friction { get; private set; } = 0.85f;
         public Vector2D Velocity { get; private set; }
-        public bool OnGround => Hitbox.CollisionTop.Colliding;
-
         public KinematicObject(Vector2D position, Vector2D size) : base(position, size)
         {
             MovementManager.Register(this);
-            GravityManager.Register(this);
         }
 
         public void ApplyVelocity(Vector2D velocity)

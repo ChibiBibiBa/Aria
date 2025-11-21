@@ -36,11 +36,11 @@ namespace Aria.Systems.Movement
                 velocity.X = 0;
             }
 
-            if (hitbox.CollisionDown.Colliding && velocity.Y < 0)
+            if (hitbox.CollisionTop.Colliding && velocity.Y < 0)
             {
                 velocity.Y = 0;
             }
-            else if (hitbox.CollisionTop.Colliding && velocity.Y > 0)
+            else if (hitbox.CollisionDown.Colliding && velocity.Y > 0)
             {
                 velocity.Y = 0;
             }
