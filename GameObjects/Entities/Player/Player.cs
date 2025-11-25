@@ -1,6 +1,7 @@
 using Aria.GameObjects;
 using Aria.templates;
 using Aria.GameObjects.Entities;
+using Aria.Mechanics.Stats;
 
 
 namespace Aria.GameObjects.Entities.Player
