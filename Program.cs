@@ -7,6 +7,7 @@ using Aria.GameObjects.Entities.Player;
 using Aria.GameObjects.Enviroment;
 using Aria.Systems.Movement;
 using Aria.Context;
+using Aria.GameObjects.Entities.Enemies;
 
 namespace ConsoleApp
 {
@@ -21,6 +22,8 @@ namespace ConsoleApp
 
 
             Player player = new Player(new Vector2D((ContextData.Window.Width / 2) + 25, (ContextData.Window.Height / 2) + 25), new Vector2D(50, 50));
+
+            Slime slime = new Slime(new Vector2D(20, 20), new Vector2D(15, 15));
 
             ContextData.SetPlayer(player);
 
@@ -52,6 +55,8 @@ namespace ConsoleApp
                 DrawingHelper.DrawRectangle(player.Hitbox.ToRectangle(), Color.Blue);
 
                 DrawingHelper.DrawRectangle(house.Hitbox.ToRectangle(), Color.Orange);
+
+                DrawingHelper.DrawRectangle(slime.Hitbox.ToRectangle(), Color.DarkPurple);
 
                 DrawingHelper.DrawRectangle(BorderNorth.Hitbox.ToRectangle(), Color.Red);
                 DrawingHelper.DrawRectangle(BorderWest.Hitbox.ToRectangle(), Color.Red);

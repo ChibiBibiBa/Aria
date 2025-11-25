@@ -16,14 +16,12 @@ namespace Aria.Mechanics.Equipments
 
         public ItemStats Stats { get; private set; }
 
-        public IAbility Ability { get; private set; }
 
-        public Item(string name, string description, ItemStats stats, IAbility ability)
+        public Item(string name, string description, ItemStats stats)
         {
             Name = name;
             Description = description;
             Stats = stats;
-            Ability = ability;
         }
     }
 }

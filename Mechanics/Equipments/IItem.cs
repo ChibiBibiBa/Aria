@@ -13,6 +13,5 @@ namespace Aria.Mechanics.Equipments
         string Name { get; }
         string Description { get; }
         ItemStats Stats { get; }
-        IAbility Ability { get; }
     }
 }
