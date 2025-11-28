@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Aria.Mechanics.Equipments
 {
-    internal class Item : IItem
+    public class Item : IItem
     {
         public string Name { get; private set; }
 
