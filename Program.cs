@@ -50,7 +50,7 @@ namespace ConsoleApp
                 Raylib.BeginMode2D(camera);
                 Raylib.ClearBackground(Color.Black);
 
-                DrawingHelper.DrawRectangle(tree.Hitbox.ToRectangle(), Color.Green);
+                DrawingHelper.DrawRectangle(tree.Hitbox.ToRectangle(), Color.Green);    
 
                 DrawingHelper.DrawRectangle(player.Hitbox.ToRectangle(), Color.Blue);
 

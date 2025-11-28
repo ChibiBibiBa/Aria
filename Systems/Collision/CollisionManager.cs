@@ -1,4 +1,5 @@
 using Aria.GameObjects;
+using Aria.GameObjects.Entities.Enemies;
 using Aria.GameObjects.Enviroment;
 using Raylib_cs;
 
@@ -29,18 +30,14 @@ namespace Aria.Systems.Collision
                     var first = objects[i];
                     var second = objects[j];
 
-                    CollideTwo(first.Hitbox, second.Hitbox);
-                    if (first.Hitbox.IsColliding)
-                    {
-                        CheckCollisionType(first, second);
-                    }
+                    CollideTwo(first, second);
                 }
             }
         }
-        public static void CollideTwo(IHitbox first, IHitbox second)
+        public static void CollideTwo(GameObject first, GameObject second)
         {
-            Rectangle a = first.ToRectangle();
-            Rectangle b = second.ToRectangle();
+            Rectangle a = first.Hitbox.ToRectangle();
+            Rectangle b = second.Hitbox.ToRectangle();
 
             if (!Raylib.CheckCollisionRecs(a, b))
                 return;
@@ -60,22 +57,22 @@ namespace Aria.Systems.Collision
             {
                 if (dx > 0)
                 {
-                    first.CollisionLeft.Colliding = true;
+                    SetCollision(first.Hitbox.CollisionLeft, second);
                 }
                 else
                 {
-                    first.CollisionRight.Colliding = true;
+                    SetCollision(first.Hitbox.CollisionRight, second);
                 }
             }
             else
             {
                 if (dy > 0)
                 {
-                    first.CollisionTop.Colliding = true;
+                    SetCollision(first.Hitbox.CollisionTop, second);
                 }
                 else
                 {
-                    first.CollisionDown.Colliding = true;
+                    SetCollision(first.Hitbox.CollisionDown, second);
                 }
             }
         }
@@ -88,14 +85,16 @@ namespace Aria.Systems.Collision
             }
         }
 
-        public static void CheckCollisionType(GameObject first, GameObject second)
+        public static void SetCollision(CollisionEntry first, GameObject second)
         {
-            if (first.Hitbox.CollisionDown.Colliding)
+            first.Colliding = true;
+            if (second is Prop)
             {
-                if (second is Prop)
-                {
-                    first.Hitbox.CollisionTop.Target = CollidingWith.Enviroment;
-                }
+                first.Target = CollidingWith.Enviroment;
+            }
+            if (second is Enemy)
+            {
+                first.Target = CollidingWith.Enemy;
             }
         }
 

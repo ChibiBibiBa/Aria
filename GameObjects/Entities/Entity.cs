@@ -11,6 +11,7 @@ namespace Aria.GameObjects.Entities
         public EntityStats Stats { get; private set; }
         public bool Alive { get; private set; } = true;
         public bool Invulnerable { get; private set; } = false;
+        public EntityState state { get; private set; } = EntityState.Iddle;
 
         public Entity(Vector2D position, Vector2D size) : base(position, size)
         {
